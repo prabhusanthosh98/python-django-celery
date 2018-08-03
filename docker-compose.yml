@@ -1,0 +1,40 @@
+version: '3.1'
+services:
+  rabbitmq:
+    container_name: 'rabbitmq'
+    image: 'rabbitmq:latest'
+    env_file:
+      - db_env
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+    networks:
+      - my-net
+
+
+  demo-web:
+    build: ./df-web
+    container_name: 'demo-web'
+    ports:
+      - "8080:8080"
+
+    networks:
+      - my-net
+
+    env_file:
+      - db_env
+
+
+  demo-workers:
+    build: ./df-workers
+    container_name: 'demo-workers'
+    networks:
+      - my-net
+
+    env_file:
+      - db_env
+
+networks:
+  my-net:
+    driver: bridge
+
