@@ -1,10 +1,10 @@
 FROM python:3.5
 
 USER root
-RUN apt-get update && apt-get install -y \
-    htop \
-    vim \
-    less
+# RUN apt-get update && apt-get install -y \
+#     htop \
+#     vim \
+#     less
 WORKDIR /root
 
 ADD ./ /root
